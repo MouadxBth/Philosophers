@@ -5,8 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/22 02:01:35 by mbouthai          #+#    #+#             */
+/*   Updated: 2022/09/22 02:01:37 by mbouthai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers_death_bonus.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:26:36 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/20 15:56:22 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/22 02:01:19 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +37,8 @@ void	*ft_check_for_death(void *arg)
 			>= index->info->time_to_die)
 		{
 			index->is_dead = 1;
-			ft_print_message(index, "died");
 			sem_wait(index->info->printing);
+			printf("%ld %i has died\n", time - index->info->start, index->id);
 			sem_post(index->info->exit);
 			return (NULL);
 		}

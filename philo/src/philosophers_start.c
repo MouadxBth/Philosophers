@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:27:25 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/20 03:55:21 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/22 08:57:45 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_start_philosophers(t_philosopher **head)
 	{
 		index->last_time_eaten = index->info->start;
 		pthread_create(&index->thread, NULL, ft_begin_cycle, index);
+		pthread_detach(index->thread);
 		index = index->right;
 	}
 }

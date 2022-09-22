@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 00:51:37 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/20 16:00:40 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/22 09:03:33 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,26 @@ static void	ft_eat(t_philosopher *philosopher)
 
 static void	ft_pickup_forks(t_philosopher *philosopher)
 {
-	sem_wait(philosopher->info->forks);
-	ft_print_message(philosopher, "has taken a fork");
-	sem_wait(philosopher->info->forks);
-	ft_print_message(philosopher, "has taken a fork");
+	if (philosopher->id % 2)
+	{
+		sem_wait(philosopher->info->forks);
+		ft_print_message(philosopher, "has taken a fork");
+		sem_wait(philosopher->info->forks);
+		ft_print_message(philosopher, "has taken a fork");
+	}
+	else
+	{
+		sem_wait(philosopher->info->forks);
+		ft_print_message(philosopher, "has taken a fork");
+		sem_wait(philosopher->info->forks);
+		ft_print_message(philosopher, "has taken a fork");
+	}
 }
 
 void	ft_begin_cycle(t_philosopher *philosopher)
 {
 	pthread_t		death;
 
-	if (!(philosopher->id % 2))
-		usleep(philosopher->info->time_to_eat * 1000);
 	pthread_create(&death, NULL, ft_check_for_death, philosopher);
 	while (!philosopher->is_dead)
 	{

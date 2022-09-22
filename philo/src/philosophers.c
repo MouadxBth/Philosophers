@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 15:25:58 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/22 01:35:17 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/22 09:00:34 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	main(int argc, char **argv)
 	ft_create_philosophers(&info, &head);
 	ft_start_philosophers(&head);
 	ft_check_for_death(head);
-	ft_detach(&head);
 	ft_cleanup(&head);
-	//sleep(1);
+	ft_usleep(20000);
 	return (0);
 }

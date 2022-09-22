@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 19:58:02 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/20 03:59:21 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/22 08:36:35 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ static void	ft_sleep(t_philosopher *philosopher)
 	pthread_mutex_unlock(&philosopher->fork);
 	pthread_mutex_unlock(&philosopher->right->fork);
 	ft_print_message(philosopher, "is sleeping");
-	usleep(philosopher->info->time_to_sleep * 1000);
+	ft_usleep(1000*philosopher->info->time_to_sleep);
 }
 
 static void	ft_eat(t_philosopher *philosopher)
 {
 	ft_print_message(philosopher, "is eating");
-	usleep(philosopher->info->time_to_eat * 1000);
+	ft_usleep(1000*philosopher->info->time_to_eat);
 	philosopher->last_time_eaten = ft_current_time();
 	philosopher->times_eaten++;
 	if (!philosopher->is_done
@@ -52,10 +52,20 @@ static void	ft_eat(t_philosopher *philosopher)
 
 static void	ft_pickup_forks(t_philosopher *philosopher)
 {
-	pthread_mutex_lock(&philosopher->fork);
-	ft_print_message(philosopher, "has taken a fork");
-	pthread_mutex_lock(&philosopher->right->fork);
-	ft_print_message(philosopher, "has taken a fork");
+	if (philosopher->id % 2)
+	{
+		pthread_mutex_lock(&philosopher->fork);
+		ft_print_message(philosopher, "has taken a fork");
+		pthread_mutex_lock(&philosopher->right->fork);
+		ft_print_message(philosopher, "has taken a fork");
+	}
+	else
+	{
+		pthread_mutex_lock(&philosopher->right->fork);
+		ft_print_message(philosopher, "has taken a fork");
+		pthread_mutex_lock(&philosopher->fork);
+		ft_print_message(philosopher, "has taken a fork");
+	}
 }
 
 void	*ft_begin_cycle(void *arg)
@@ -63,8 +73,6 @@ void	*ft_begin_cycle(void *arg)
 	t_philosopher	*philosopher;
 
 	philosopher = (t_philosopher *)arg;
-	if (!(philosopher->id % 2))
-		usleep(philosopher->info->time_to_eat * 1000);
 	while (!philosopher->is_dead)
 	{
 		ft_pickup_forks(philosopher);

@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:55:44 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/20 03:47:11 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/22 08:35:38 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int		ft_validate_info(t_info *info, int argc);
 int		ft_fill_info(t_info *info, int argc, char **argv);
 
 long	ft_current_time(void);
+
+void	ft_usleep(long time);
 
 void	ft_print_message(t_philosopher *philosopher, char *str);
 

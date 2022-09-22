@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 03:22:37 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/17 01:14:59 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/22 02:02:59 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_detach(t_philosopher *index)
 	status = -1;
 	while (index && --count >= 0)
 	{
-		waitpid(index->pid, &status, 0);
+		waitpid(index->pid, &status, -1);
 		index = index->right;
 	}
 	if (index->info->eating != NULL)

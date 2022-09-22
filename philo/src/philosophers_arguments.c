@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:44:30 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/14 00:20:37 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/20 03:47:48 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_validate_info(t_info *info, int argc)
 			return (0);
 		pthread_mutex_init(&info->eating, NULL);
 	}
+	info->exit = 0;
 	pthread_mutex_init(&info->printing, NULL);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:26:50 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/17 01:24:51 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:52:17 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,15 @@ void	ft_print_message(t_philosopher *philosopher, char *str)
 
 sem_t	*ft_new_semaphore(char *name, int value)
 {
+	sem_t	*result;
+
 	if (!name || value < 0)
 		return (NULL);
-	sem_unlink(name);
-	return (sem_open(name, O_CREAT,
-			1 << 8 | 1 << 7 | 1 << 5 | 1 << 2, value));
+	result = sem_open(name, O_CREAT | O_EXCL, 644, value);
+	if (result == SEM_FAILED)
+	{
+		sem_unlink(name);
+		return (sem_open(name, O_CREAT | O_EXCL, 644, value));
+	}
+	return (result);
 }

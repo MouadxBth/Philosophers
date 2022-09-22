@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:27:25 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/17 01:26:28 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:47:38 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,9 @@ void	ft_start_philosophers(t_philosopher *index)
 		index->last_time_eaten = index->info->start;
 		index->pid = fork();
 		if (!index->pid)
-		{
 			ft_begin_cycle(index);
-		}
 		else if (index->pid < 0)
 			exit(1);
-		usleep(100);
 		index = index->right;
 	}
 }

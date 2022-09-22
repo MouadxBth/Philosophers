@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:27:14 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/16 23:27:17 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/20 03:47:34 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static t_philosopher	*ft_create_philosopher(t_info *info, int id)
 	if (!result)
 		return (NULL);
 	result->id = id;
+	result->is_dead = 0;
+	result->is_done = 0;
 	result->times_eaten = 0;
 	result->last_time_eaten = -1;
 	result->left = result;

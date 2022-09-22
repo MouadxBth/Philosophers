@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:39:15 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/17 01:25:24 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:58:41 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_info
 {
 	int				number_of_philosophers;
 	int				minimum_eat_times;
-	int				done_eating;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
@@ -35,6 +34,7 @@ typedef struct s_info
 	sem_t			*printing;
 	sem_t			*forks;
 	sem_t			*eating;
+	sem_t			*done;
 	sem_t			*exit;
 }	t_info;
 
@@ -43,6 +43,7 @@ typedef struct s_philosopher
 	int						id;
 	int						pid;
 	int						is_dead;
+	int						is_done;
 	int						times_eaten;
 	long					last_time_eaten;
 	struct s_philosopher	*right;
@@ -69,6 +70,8 @@ void	ft_create_philosophers(t_info *info, t_philosopher **head);
 void	ft_start_philosophers(t_philosopher *head);
 
 void	*ft_check_for_death(void *arg);
+
+void	*ft_check_eating(void *arg);
 
 void	ft_begin_cycle(t_philosopher *philosopher);
 

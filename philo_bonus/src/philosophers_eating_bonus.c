@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers_bonus.c                               :+:      :+:    :+:   */
+/*   philosophers_eating_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/26 15:25:58 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/20 16:13:52 by mbouthai         ###   ########.fr       */
+/*   Created: 2022/09/20 15:42:07 by mbouthai          #+#    #+#             */
+/*   Updated: 2022/09/20 16:14:08 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-int	main(int argc, char **argv)
+void	*ft_check_eating(void *arg)
 {
-	t_info			info;
-	pthread_t		thread;
-	t_philosopher	*head;
+	t_philosopher	*index;
+	int				count;
 
-	if (!ft_check_args(argc))
-		return (1);
-	if (!ft_fill_info(&info, argc, argv))
-		return (1);
-	head = NULL;
-	ft_create_philosophers(&info, &head);
-	ft_start_philosophers(head);
-	if (info.minimum_eat_times > 0)
-		pthread_create(&thread, NULL, ft_check_eating, head);
-	ft_kill(head);
-	ft_detach(head);
-	ft_cleanup(head);
-	return (0);
+	index = (t_philosopher *)arg;
+	count = index->info->number_of_philosophers;
+	while (--count >= 0)
+	{
+		sem_wait(index->info->done);
+		if (count - 1 >= 0)
+		{
+			sem_post(index->info->eating);
+			sem_post(index->info->printing);
+		}
+	}
+	sem_post(index->info->exit);
+	return (NULL);
 }

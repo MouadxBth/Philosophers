@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:44:30 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/17 01:24:29 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:53:13 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	ft_validate_info(t_info *info, int argc)
 		if (info->minimum_eat_times <= 0)
 			return (0);
 		info->eating = ft_new_semaphore("eating", 1);
+		info->done = ft_new_semaphore("done", 0);
 	}
-	info->done_eating = 0;
 	info->printing = ft_new_semaphore("printing", 1);
 	info->forks = ft_new_semaphore("forks",
 			info->number_of_philosophers);

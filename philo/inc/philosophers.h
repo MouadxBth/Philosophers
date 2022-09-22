@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:55:44 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/16 23:37:02 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/20 03:47:11 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_info
 	int				number_of_philosophers;
 	int				minimum_eat_times;
 	int				done_eating;
+	int				exit;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
@@ -35,6 +36,8 @@ typedef struct s_info
 typedef struct s_philosopher
 {
 	int						id;
+	int						is_dead;
+	int						is_done;
 	int						times_eaten;
 	long					last_time_eaten;
 	struct s_philosopher	*right;

@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/20 15:36:27 by mbouthai          #+#    #+#              #
-#    Updated: 2022/09/20 03:46:45 by mbouthai         ###   ########.fr        #
+#    Updated: 2022/09/25 02:19:55 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ INC_FS	:= philosophers_bonus.h
 SRC_FS	:= philosophers.c philosopher.c \
 	philosophers_create.c philosopher_utils.c \
 	philosophers_arguments.c philosophers_cleanup.c \
-	philosophers_start.c philosophers_death.c ft_atoi.c
+	philosophers_start.c philosophers_death.c ft_atoi.c \
+	philosophers_init.c philosophers_exit.c
 
 INCS	= $(addprefix $(INC_DIR), $(INC_FS))
 

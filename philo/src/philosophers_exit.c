@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers_start.c                               :+:      :+:    :+:   */
+/*   philosophers_exit.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 23:27:25 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/25 03:24:21 by mbouthai         ###   ########.fr       */
+/*   Created: 2022/09/25 01:56:41 by mbouthai          #+#    #+#             */
+/*   Updated: 2022/09/25 02:00:55 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_start_philosophers(t_philosopher *index)
+int	ft_should_stop(t_philosopher *index)
 {
 	t_info	*info;
-	int		count;
 
 	if (!index)
 		return (0);
 	info = index->info;
-	info->start = ft_milliseconds();
-	count = -1; 
-	while (index && ++count < info->number_of_philosophers)
-	{
-		index->last_time_eaten = ft_milliseconds();
-		index->start = ft_milliseconds();
-	//	printf("%lld starting %i\n", ft_milliseconds() - index->start, index->id);
-		if (pthread_create(&index->thread, NULL, ft_begin_cycle, index))
-			return (0);
-		index = index->right;
-	}
-	return (1);
+	if (info->exit || index->is_dead)
+		return (1);
+	if (info->minimum_eat_times > 0
+		&& index->times_eaten >= info->minimum_eat_times)
+		info->exit = 1;
+	return (info->exit);
 }

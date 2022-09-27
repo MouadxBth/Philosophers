@@ -6,13 +6,13 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:26:50 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/20 15:52:17 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/27 01:13:45 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-long	ft_current_time(void)
+long	ft_milliseconds(void)
 {
 	struct timeval	time;
 	long			result;
@@ -22,14 +22,24 @@ long	ft_current_time(void)
 	return (result);
 }
 
+void	ft_usleep(long time)
+{
+	long	start;
+
+	start = ft_milliseconds();
+	usleep(time * 920);
+	while (ft_milliseconds() < start + time)
+		usleep(time);
+}
+
 void	ft_print_message(t_philosopher *philosopher, char *str)
 {
 	long	timestamp;
 
 	if (!philosopher || !str)
 		return ;
-	timestamp = ft_current_time() - philosopher->info->start;
 	sem_wait(philosopher->info->printing);
+	timestamp = ft_milliseconds() - philosopher->info->start;
 	printf("%ld %i %s\n", timestamp, philosopher->id, str);
 	sem_post(philosopher->info->printing);
 }

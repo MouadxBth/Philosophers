@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:26:36 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/25 02:25:35 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:15:29 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	*ft_check_for_death(void *arg)
 		}
 		if (ft_should_stop(index))
 			return (NULL);
+		index = index->right;
 	}
 	return (NULL);
 }

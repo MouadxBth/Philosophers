@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 01:56:41 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/25 02:00:55 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/26 23:58:21 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	ft_should_stop(t_philosopher *index)
 	if (info->exit || index->is_dead)
 		return (1);
 	if (info->minimum_eat_times > 0
-		&& index->times_eaten >= info->minimum_eat_times)
-		info->exit = 1;
+		&& info->done_eating
+		>= info->number_of_philosophers)
+			info->exit = 1;
 	return (info->exit);
 }

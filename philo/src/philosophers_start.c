@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:27:25 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/25 03:24:21 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:18:32 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ int	ft_start_philosophers(t_philosopher *index)
 	count = -1; 
 	while (index && ++count < info->number_of_philosophers)
 	{
-		index->last_time_eaten = ft_milliseconds();
-		index->start = ft_milliseconds();
-	//	printf("%lld starting %i\n", ft_milliseconds() - index->start, index->id);
+		index->last_time_eaten = info->start;
 		if (pthread_create(&index->thread, NULL, ft_begin_cycle, index))
 			return (0);
 		index = index->right;

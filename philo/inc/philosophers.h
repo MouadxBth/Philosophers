@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:55:44 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/25 02:21:21 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/27 01:09:24 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_philosopher
 	int						is_eating;
 	int						times_eaten;
 	long long				last_time_eaten;
-	long long				start;
 	struct s_philosopher	*right;
 	struct s_philosopher	*left;
 	pthread_mutex_t			fork;

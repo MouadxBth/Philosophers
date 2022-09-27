@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:26:50 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/25 02:24:05 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:26:16 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,12 @@ void	ft_usleep(long long time)
 	start = ft_milliseconds();
 	usleep(time * 920);
 	while (ft_milliseconds() < start + time)
-		usleep(time * 3);
+		usleep(time);
 }
 
 void	ft_print_message(t_philosopher *philosopher, char *str)
 {
-	long	timestamp;
-
-	if (!philosopher || !str)
-		return ;
-	timestamp = ft_milliseconds() - philosopher->info->start;
 	pthread_mutex_lock(&philosopher->info->printing);
-	printf("%ld %i %s\n", timestamp, philosopher->id, str);
-	if (str[0] != 'd')
-		pthread_mutex_unlock(&philosopher->info->printing);
+	printf("%lld %i %s\n", ft_milliseconds() - philosopher->info->start, philosopher->id, str);
+	pthread_mutex_unlock(&philosopher->info->printing);
 }

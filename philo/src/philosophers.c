@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 00:12:05 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/10/13 18:10:34 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/13 22:10:48 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	main(int argc, char **argv)
 {
 	t_info			info;
+	pthread_t		death;
 	t_philosopher	*head;
-	pthread_t	death;
 
 	head = NULL;
 	if (!ft_fill_info(&info, argc, argv))

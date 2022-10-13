@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:26:36 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/10/13 22:01:13 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/13 22:11:18 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	*ft_check_for_death(void *arg)
 {
-	t_philosopher		*index;
+	t_philosopher	*index;
 	t_info			*info;
-	long		time;
-	int		count;
+	long			time;
+	int				count;
 
 	index = (t_philosopher *)arg;
 	info = index->info;

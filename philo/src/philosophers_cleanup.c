@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 03:22:37 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/10/13 17:48:40 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/13 22:09:54 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_await_philosophers(t_philosopher *index)
 {
 	t_info	*info;
-	int				count;
+	int		count;
 
 	if (!index)
 		return (0);

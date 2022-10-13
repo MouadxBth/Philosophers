@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:27:25 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/10/13 16:39:33 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/13 22:12:32 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_start_philosophers(t_philosopher *index)
 
 	if (!index)
 		return (0);
-	count = -1; 
+	count = -1;
 	info = index->info;
 	info->start = ft_milliseconds();
 	while (index && ++count < info->number_of_philosophers)

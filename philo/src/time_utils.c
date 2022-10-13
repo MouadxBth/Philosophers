@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers_exit.c                                :+:      :+:    :+:   */
+/*   time_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 01:56:41 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/26 23:58:21 by mbouthai         ###   ########.fr       */
+/*   Created: 2022/10/13 15:33:23 by mbouthai          #+#    #+#             */
+/*   Updated: 2022/10/13 15:33:37 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_should_stop(t_philosopher *index)
+long	ft_milliseconds(void)
 {
-	t_info	*info;
+	struct timeval	time;
 
-	if (!index)
-		return (0);
-	info = index->info;
-	if (info->exit || index->is_dead)
-		return (1);
-	if (info->minimum_eat_times > 0
-		&& info->done_eating
-		>= info->number_of_philosophers)
-			info->exit = 1;
-	return (info->exit);
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+void	ft_msleep(long milliseconds)
+{
+	long	start;
+
+	start = ft_milliseconds();
+	usleep(milliseconds * 900);
+	while (ft_milliseconds() < start + milliseconds)
+		usleep(milliseconds);
 }

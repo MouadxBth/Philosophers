@@ -6,46 +6,51 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 03:22:37 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/25 02:24:45 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/13 17:48:40 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_await_philosophers(t_philosopher *index)
+int	ft_await_philosophers(t_philosopher *index)
 {
 	t_info	*info;
 	int				count;
 
 	if (!index)
-		return ;
+		return (0);
 	info = index->info;
 	count = -1;
 	while (index && ++count < info->number_of_philosophers)
 	{
-		//printf("WAITING %i\n", index->id);
-		pthread_join(index->thread, NULL);
-		//printf("DONE %i\n", index->id);
+		if (pthread_join(index->thread, NULL))
+			return (0);
 		index = index->right;
 	}
+	return (1);
 }
 
-void	ft_destroy_mutexes(t_philosopher *index)
+int	ft_destroy_mutexes(t_philosopher *index)
 {
 	t_info			*info;
 	int				count;
 
 	if (!index)
-		return ;
+		return (0);
 	info = index->info;
 	count = -1;
-	if (info->minimum_eat_times > 0)
-		pthread_mutex_destroy(&info->eating);
+	if (pthread_mutex_destroy(&info->printing)
+		|| pthread_mutex_destroy(&info->exit_mutex))
+		return (0);
 	while (index && ++count < info->number_of_philosophers)
 	{
-		pthread_mutex_destroy(&index->fork);
+		if (pthread_mutex_destroy(&index->fork)
+			|| pthread_mutex_destroy(&index->last_time_ate_mutex)
+			|| pthread_mutex_destroy(&index->times_ate_mutex))
+			return (0);
 		index = index->right;
 	}
+	return (1);
 }
 
 void	ft_free_philosophers(t_philosopher *index)

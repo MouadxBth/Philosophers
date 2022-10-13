@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/26 15:25:58 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/26 22:15:12 by mbouthai         ###   ########.fr       */
+/*   Created: 2022/09/28 00:12:05 by mbouthai          #+#    #+#             */
+/*   Updated: 2022/10/13 18:10:34 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,25 @@ int	main(int argc, char **argv)
 {
 	t_info			info;
 	t_philosopher	*head;
-	pthread_t		death;
+	pthread_t	death;
 
-	if (!ft_check_args(argc))
-		return (1);
+	head = NULL;
 	if (!ft_fill_info(&info, argc, argv))
 		return (1);
-	head = NULL;
 	if (!ft_create_philosophers(&info, &head))
 		return (1);
-	if (!ft_init_philosophers(head))
-		return (1);
+	if (!ft_initialize_info(&info))
+		return (ft_free_philosophers(head), 1);
+	if (!ft_initialize_philosophers(head))
+		return (ft_free_philosophers(head), 1);
 	if (!ft_start_philosophers(head))
-		return (1);
-	pthread_create(&death, NULL, ft_check_for_death, head);
-	pthread_join(death, NULL);
-	ft_await_philosophers(head);
-	ft_destroy_mutexes(head);
+		return (ft_free_philosophers(head), 1);
+	if (!ft_monitor_philosophers(head, &death))
+		return (ft_free_philosophers(head), 1);
+	if (!ft_await_philosophers(head))
+		return (ft_free_philosophers(head), 1);
+	if (!ft_destroy_mutexes(head))
+		return (ft_free_philosophers(head), 1);
 	ft_free_philosophers(head);
 	return (0);
 }

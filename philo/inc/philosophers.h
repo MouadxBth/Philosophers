@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:55:44 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/27 01:09:24 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/13 18:13:58 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,52 +21,55 @@
 
 typedef struct s_info
 {
-	int				minimum_eat_times;
 	int				number_of_philosophers;
+	int				minimum_eat_times;
 	int				done_eating;
 	int				exit;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
-	long long		start;
+	long			start;
 	pthread_mutex_t	printing;
-	pthread_mutex_t	eating;
+	pthread_mutex_t exit_mutex;
 }	t_info;
 
 typedef struct s_philosopher
 {
 	int						id;
-	int						is_dead;
-	int						is_done;
-	int						is_eating;
-	int						times_eaten;
-	long long				last_time_eaten;
-	struct s_philosopher	*right;
-	struct s_philosopher	*left;
-	pthread_mutex_t			fork;
-	pthread_t				thread;
-	t_info					*info;
+	int						times_ate;
+	long						last_time_ate;
+	struct s_philosopher				*left;
+	struct s_philosopher				*right;
+	pthread_t					thread;
+	pthread_mutex_t					fork;
+	pthread_mutex_t					last_time_ate_mutex;
+	pthread_mutex_t					times_ate_mutex;
+	t_info						*info;
 }	t_philosopher;
 
 int			ft_atoi(const char *str);
 
-long long	ft_milliseconds(void);
+long	ft_milliseconds(void);
 
-long long	ft_microseconds(void);
+void	ft_msleep(long milliseconds);
 
-void		ft_usleep(long long time);
+void	ft_print_message(t_philosopher *philosopher, char *msg);
 
-void		ft_print_message(t_philosopher *index, char *str);
+int			ft_times_ate(t_philosopher *index, int n);
 
-int			ft_check_args(int argc);
+int			ft_should_exit(t_info *info, int n);
 
-int			ft_validate_info(t_info *info, int argc);
+int			ft_done_eating(t_philosopher *index);
+
+long			ft_last_time_ate(t_philosopher *index, long n);
 
 int			ft_fill_info(t_info *info, int argc, char **argv);
 
 int			ft_create_philosophers(t_info *info, t_philosopher **head);
 
-int			ft_init_philosophers(t_philosopher *index);
+int			ft_initialize_info(t_info *info);
+
+int			ft_initialize_philosophers(t_philosopher *index);
 
 int			ft_start_philosophers(t_philosopher *index);
 
@@ -74,12 +77,13 @@ void		*ft_begin_cycle(void *arg);
 
 void		*ft_check_for_death(void *arg);
 
-int			ft_should_stop(t_philosopher *philosopher);
+int			ft_monitor_philosophers(t_philosopher *index, pthread_t *thread);
 
-void		ft_await_philosophers(t_philosopher *index);
+int			ft_await_philosophers(t_philosopher *index);
 
-void		ft_destroy_mutexes(t_philosopher *index);
+int			ft_destroy_mutexes(t_philosopher *index);
 
 void		ft_free_philosophers(t_philosopher *index);
+
 
 #endif

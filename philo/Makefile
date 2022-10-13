@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/20 15:36:27 by mbouthai          #+#    #+#              #
-#    Updated: 2022/09/26 23:45:13 by mbouthai         ###   ########.fr        #
+#    Updated: 2022/10/13 22:07:50 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,17 +38,17 @@ RMDIR	:= rmdir
 
 CC	:= gcc
 
-CFLAGS	:= -Wall -Werror -Wextra -pthread -g -I$(INC_DIR) $(EXTERN)
+CFLAGS	:= -Wall -Werror -Wextra -g -I$(INC_DIR) $(EXTERN)
 
-LFLAGS	:=
+LFLAGS	:= -pthread #-fsanitize=thread
 
 INC_FS	:= philosophers_bonus.h
 
-SRC_FS	:= philosophers.c philosopher.c \
-	philosophers_create.c philosopher_utils.c \
-	philosophers_arguments.c philosophers_cleanup.c \
-	philosophers_start.c philosophers_death.c ft_atoi.c \
-	philosophers_init.c philosophers_exit.c
+SRC_FS	:= ft_atoi.c philosophers_utils.c philosophers_arguments.c \
+		philosophers_create.c philosopher.c philosophers.c \
+		philosophers_start.c philosophers_death.c time_utils.c \
+		philosophers_cleanup.c philosophers_init.c
+
 
 INCS	= $(addprefix $(INC_DIR), $(INC_FS))
 

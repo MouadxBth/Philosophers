@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:26:36 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/10/13 22:11:18 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/13 22:48:26 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_check_for_death(void *arg)
 
 	index = (t_philosopher *)arg;
 	info = index->info;
-	while (!(ft_done_eating(index) >= info->number_of_philosophers))
+	while (1)
 	{
 		count = info->number_of_philosophers;
 		while (--count >= 0)
@@ -33,6 +33,8 @@ void	*ft_check_for_death(void *arg)
 				ft_should_exit(info, 1);
 				return (NULL);
 			}
+			if (ft_done_eating(index) >= info->number_of_philosophers)
+				return (ft_should_exit(info, 1), NULL);
 			index = index->right;
 		}
 		ft_msleep(1);

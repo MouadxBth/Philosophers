@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 00:51:37 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/22 09:03:33 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/13 22:40:25 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	ft_eat(t_philosopher *philosopher)
 {
 	ft_print_message(philosopher, "is eating");
 	usleep(philosopher->info->time_to_eat * 1000);
-	philosopher->last_time_eaten = ft_current_time();
+	philosopher->last_time_eaten = ft_milliseconds();
 	philosopher->times_eaten++;
 	if (!philosopher->is_done
 		&& philosopher->info->minimum_eat_times > 0

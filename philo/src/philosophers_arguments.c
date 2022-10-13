@@ -6,15 +6,15 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:44:30 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/10/13 22:19:56 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/13 22:43:53 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int	ft_error(char *msg, int ret)
+static int	ft_error(char *msg)
 {
-	return (printf("[ERROR]: %s.\n", msg), ret);
+	return (printf("[ERROR]: %s.\n", msg), 0);
 }
 
 static int	ft_check_args(int argc)

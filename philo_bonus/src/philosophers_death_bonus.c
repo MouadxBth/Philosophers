@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 01:14:54 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/09/27 01:15:01 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/13 22:41:24 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_check_for_death(void *arg)
 	index = (t_philosopher *)arg;
 	while (1)
 	{
-		time = ft_current_time();
+		time = ft_milliseconds();
 		if (time - index->last_time_eaten
 			>= index->info->time_to_die)
 		{

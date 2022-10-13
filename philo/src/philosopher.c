@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 00:51:55 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/10/13 23:42:07 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/14 00:12:29 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	*ft_begin_cycle(void *arg)
 	index = (t_philosopher *)arg;
 	if (!(index->id % 2))
 		ft_msleep(5);
+	if (index->info->number_of_philosophers == 1)
+		return (NULL);
 	while (ft_should_exit(index->info, -1) != 1)
 	{
 		ft_pickup_forks(index);

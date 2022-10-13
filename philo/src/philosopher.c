@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 00:51:55 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/10/13 22:10:21 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/13 23:42:07 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ static void	ft_pickup_forks(t_philosopher *index)
 	ft_print_message(index, "has taken a fork");
 }
 
-static void	ft_eat(t_philosopher *index)
+static int	ft_eat(t_philosopher *index)
 {
 	ft_print_message(index, "is eating");
 	ft_last_time_ate(index, ft_milliseconds());
 	ft_msleep(index->info->time_to_sleep);
 	pthread_mutex_unlock(&index->fork);
 	pthread_mutex_unlock(&index->right->fork);
-	ft_times_ate(index, -2);
+	return (ft_times_ate(index, -2));
 }
 
 static void	ft_sleep(t_philosopher *index)
@@ -51,7 +51,8 @@ void	*ft_begin_cycle(void *arg)
 	while (ft_should_exit(index->info, -1) != 1)
 	{
 		ft_pickup_forks(index);
-		ft_eat(index);
+		if (ft_eat(index) == index->info->minimum_eat_times)
+			return (NULL);
 		ft_sleep(index);
 		ft_think(index);
 	}

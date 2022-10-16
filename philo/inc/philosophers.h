@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:55:44 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/10/13 22:20:44 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/15 16:25:50 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_info
 {
 	int				number_of_philosophers;
 	int				minimum_eat_times;
-	int				done_eating;
 	int				exit;
 	long			time_to_die;
 	long			time_to_eat;
@@ -62,6 +61,7 @@ int		ft_should_exit(t_info *info, int n);
 int		ft_done_eating(t_philosopher *index);
 
 long	ft_last_time_ate(t_philosopher *index, long n);
+
 
 int		ft_fill_info(t_info *info, int argc, char **argv);
 

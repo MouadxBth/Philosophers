@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 15:33:23 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/10/13 15:33:37 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:05:14 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_msleep(long milliseconds)
 	long	start;
 
 	start = ft_milliseconds();
-	usleep(milliseconds * 900);
+	//usleep(milliseconds * 900);
 	while (ft_milliseconds() < start + milliseconds)
 		usleep(milliseconds);
 }

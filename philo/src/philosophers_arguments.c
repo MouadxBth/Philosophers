@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 02:44:30 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/10/13 22:43:53 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:32:31 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	ft_fill_info(t_info *info, int argc, char **argv)
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
-	info->done_eating = 0;
 	info->exit = 0;
 	info->start = -1;
 	return (ft_validate_info(info, argc));

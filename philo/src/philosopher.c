@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 00:51:55 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/10/14 00:12:29 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:32:11 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ft_eat(t_philosopher *index)
 {
 	ft_print_message(index, "is eating");
 	ft_last_time_ate(index, ft_milliseconds());
-	ft_msleep(index->info->time_to_sleep);
+	ft_msleep(index->info->time_to_eat);
 	pthread_mutex_unlock(&index->fork);
 	pthread_mutex_unlock(&index->right->fork);
 	return (ft_times_ate(index, -2));
